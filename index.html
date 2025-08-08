@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3D Model</title>
+    <!-- model-viewer (stable CDN) -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+      body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#111}
+      model-viewer{width:min(100%,900px);height:60vh;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    </style>
+  </head>
+  <body>
+    <model-viewer id="mv"
+      src="earth.glb"            <!-- or full URL: https://username.github.io/repo/earth.glb -->
+      alt="Earth model"
+      camera-controls
+      auto-rotate
+      exposure="1"
+      shadow-intensity="1"
+      interaction-prompt="auto"
+      ar
+      ios-src="">
+    </model-viewer>
+
+    <script>
+      // stop auto-rotate on first user interaction (nice UX)
+      const mv = document.getElementById('mv');
+      mv.addEventListener('pointerdown', ()=> mv.removeAttribute('auto-rotate'));
+
+      // optional: auto-stop rotate after X ms
+      setTimeout(()=> mv.removeAttribute('auto-rotate'), 4000); // stops after 4s
+    </script>
+  </body>
+</html>
